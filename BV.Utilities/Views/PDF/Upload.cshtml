@@ -1,0 +1,37 @@
+﻿@* @model BV.Utilities.Models.PdfModel *@
+@model BV.Utilities.Models.PdfModel
+
+@{
+    ViewData["Title"] = "Upload PDF";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post" enctype="multipart/form-data" asp-action="RemovePassword">
+    <div class="form-group">
+        <label for="PdfFile">Select PDF File</label>
+        <input type="file" class="form-control" id="PdfFile" name="PdfFile" />
+        @if (ViewData.ModelState.ContainsKey("PdfFile") && ViewData.ModelState["PdfFile"].Errors.Count > 0)
+        {
+            <div class="text-danger">@ViewData.ModelState["PdfFile"].Errors[0].ErrorMessage</div>
+        }
+    </div>
+
+    <div class="form-group">
+        <label for="Password">Enter Password</label>
+        <input type="password" class="form-control" id="Password" name="Password" />
+        @if (ViewData.ModelState.ContainsKey("Password") && ViewData.ModelState["Password"].Errors.Count > 0)
+        {
+            <div class="text-danger">@ViewData.ModelState["Password"].Errors[0].ErrorMessage</div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Remove Password</button>
+</form>
+
+@if (ViewData.ModelState.IsValid == false)
+{
+    <div class="alert alert-danger mt-3">
+        There was an error processing your request. Please check the form fields and try again.
+    </div>
+}
